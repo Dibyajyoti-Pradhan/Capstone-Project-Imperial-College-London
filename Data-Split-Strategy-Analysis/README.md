@@ -7,8 +7,6 @@ An analysis of how different train/validation/test split ratios affect machine l
 - [Experiment Results](#experiment-results)
 - [Observations](#observations)
 - [Key Takeaways](#key-takeaways)
-- [How to Run](#how-to-run)
-- [File Structure](#file-structure)
 
 ## Overview
 
@@ -115,31 +113,3 @@ When using only training and testing data (80:20 split):
 3. **Always keep test data separate**: Never tune based on test performance
 4. **The "right" split depends on context**: Dataset size, model complexity, and project requirements all matter
 5. **Stratification is essential**: Especially for imbalanced or multi-class problems
-
-## How to Run
-
-```bash
-# Navigate to the project directory
-cd Data-Split-Strategy-Analysis
-
-# Run the solution script
-python solution.py
-```
-
-**Requirements:**
-```
-scikit-learn>=0.24.0
-```
-
-## File Structure
-
-```
-Data-Split-Strategy-Analysis/
-├── README.md          # This file - observations and analysis
-├── problem.md         # Problem statement and objectives
-└── solution.py        # Python implementation with all experiments
-```
-
----
-
-*This analysis is part of the Imperial College London Capstone Project on Machine Learning.*
