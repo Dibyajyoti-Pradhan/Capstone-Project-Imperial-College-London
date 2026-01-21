@@ -10,13 +10,12 @@ An analysis of how different train/validation/test split ratios affect machine l
 
 ## Overview
 
-This experiment investigates the impact of different data split strategies on model generalization. Three split configurations were tested:
+This experiment investigates the impact of different data split strategies on model generalization. Two split configurations were tested:
 
 | Split | Training | Validation | Test |
 |-------|----------|------------|------|
 | 70:15:15 | 70% | 15% | 15% |
 | 60:20:20 | 60% | 20% | 20% |
-| 80:20 (No Val) | 80% | - | 20% |
 
 **Dataset**: Wine dataset (178 samples, 13 features, 3 classes)
 **Model**: Logistic Regression
@@ -29,7 +28,6 @@ This experiment investigates the impact of different data split strategies on mo
 |-------------|------------------|-------------------|--------------|----------------|----------|
 | 70:15:15 | 124 | 27 | 27 | **100.00%** | 96.30% |
 | 60:20:20 | 106 | 36 | 36 | 94.44% | **97.22%** |
-| 80:20 | 142 | N/A | 36 | N/A | **97.22%** |
 
 ### Detailed Results
 
@@ -41,11 +39,6 @@ This experiment investigates the impact of different data split strategies on mo
 - More realistic validation accuracy (94.44%)
 - Higher test accuracy (97.22%)
 - Larger validation/test sets provide more stable performance estimates
-
-**80:20 Split (No Validation):**
-- Highest training data available (142 samples)
-- Same test accuracy as 60:20:20 split (97.22%)
-- No intermediate validation for hyperparameter tuning
 
 ## Observations
 
@@ -72,7 +65,7 @@ The 60:20:20 split yielded a **test accuracy of 97.22%**, which is slightly high
 
 ### 3. Consequences of Omitting the Validation Set
 
-When using only training and testing data (80:20 split):
+If we were to use only training and testing data without a validation set:
 
 **Risks:**
 - **No hyperparameter tuning safety net**: Without a validation set, you risk tuning hyperparameters directly on test data, leading to data leakage
