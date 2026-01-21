@@ -51,13 +51,4 @@ Experiment with different data split ratios and observe their impact on model pe
 - Second split: 25% of remaining 80% for validation
 - Calculation: 0.25 * 0.80 = 0.20 (20% of total)
 
-## Dependencies
 
-```
-scikit-learn
-```
-
-## References
-
-- [Scikit-learn Wine Dataset](https://scikit-learn.org/stable/datasets/toy_dataset.html#wine-dataset)
-- [Train/Test/Validation Split Best Practices](https://scikit-learn.org/stable/modules/cross_validation.html)
