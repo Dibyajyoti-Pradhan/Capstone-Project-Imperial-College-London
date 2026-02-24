@@ -4,93 +4,112 @@
 
 This exercise demonstrates how bagging (Bootstrap Aggregating) works in practice using three decision trees that predict whether a customer is likely to purchase soon based on their behaviour.
 
-## Analysis of Each Decision Tree
+### Customer Behaviour Data
 
-### Tree 1
-Tree 1 starts by asking whether the customer's last purchase was more than six months ago.
-
-- **If yes (inactive customer):** It then checks whether their last purchase was worth more than £10. High-value past purchasers are classified as "Likely to purchase soon." For lower-value past purchasers, it checks recent site visits — frequent visitors are likely, infrequent visitors are unlikely.
-- **If no (recent customer):** It checks purchase value. High-value recent customers are likely; low-value recent customers are unlikely.
-
-**Key insight:** Tree 1 prioritises recency and purchase value, with site visits as a tiebreaker for dormant, low-value customers.
-
-### Tree 2
-Tree 2 also begins with the six-month recency question but branches differently.
-
-- **If yes (inactive customer):** It immediately checks site visits. Recent site activity indicates likely purchase intent; no recent visits means unlikely.
-- **If no (recent customer):** It checks purchase value first. High-value recent customers are likely. For low-value recent customers, it falls back to site visit frequency.
-
-**Key insight:** Tree 2 places greater emphasis on recent site engagement, especially for dormant customers.
-
-### Tree 3
-Tree 3 starts with purchase value as the root node — a fundamentally different structure.
-
-- **If yes (high-value purchaser):** Recent site visits indicate likely purchase; no visits means unlikely.
-- **If no (low-value purchaser):** It checks recency. Recent low-value customers who visited the site are likely; dormant low-value customers are unlikely.
-
-**Key insight:** Tree 3 treats purchase value as the primary discriminator, with site visits and recency as secondary factors.
+| Customer | Last purchase >6 months ago? | Last purchase >£10? | Visited site >once in last 2 days? |
+|----------|------------------------------|---------------------|-----------------------------------|
+| 1 | No | No | Yes |
+| 2 | Yes | Yes | No |
 
 ---
 
-## How Each Tree Votes
+## Question 1: What is your final prediction for each customer based on the majority vote across the three trees?
 
-### Customer 1
-**Profile:** Last purchase was NOT more than 6 months ago | Last purchase was NOT worth more than £10 | Has visited the site more than once in the last 2 days
+| Customer | Final Prediction |
+|----------|------------------|
+| **Customer 1** | **Likely to purchase soon** |
+| **Customer 2** | **Unlikely to purchase soon** |
 
-| Tree | Decision Path | Prediction |
-|------|---------------|------------|
-| Tree 1 | Last purchase ≤6 months → Purchase ≤£10 → **Unlikely** | Unlikely |
-| Tree 2 | Last purchase ≤6 months → Purchase ≤£10 → Visited recently → **Likely** | Likely |
-| Tree 3 | Purchase ≤£10 → Last purchase ≤6 months → Visited recently → **Likely** | Likely |
+**Customer 1** receives a "Likely" prediction because 2 out of 3 trees (Tree 2 and Tree 3) classify them as likely to purchase, while only Tree 1 classifies them as unlikely.
 
-### Customer 2
-**Profile:** Last purchase WAS more than 6 months ago | Last purchase WAS worth more than £10 | Has NOT visited the site more than once in the last 2 days
-
-| Tree | Decision Path | Prediction |
-|------|---------------|------------|
-| Tree 1 | Last purchase >6 months → Purchase >£10 → **Likely** | Likely |
-| Tree 2 | Last purchase >6 months → No recent visits → **Unlikely** | Unlikely |
-| Tree 3 | Purchase >£10 → No recent visits → **Unlikely** | Unlikely |
+**Customer 2** receives an "Unlikely" prediction because 2 out of 3 trees (Tree 2 and Tree 3) classify them as unlikely to purchase, while only Tree 1 classifies them as likely.
 
 ---
 
-## Arriving at the Majority Decision
+## Question 2: How did each tree classify the customer?
 
-Bagging uses **majority voting** to combine predictions from multiple trees:
+### Customer 1 Classification
+
+| Tree | Decision Path | Classification |
+|------|---------------|----------------|
+| **Tree 1** | Last purchase ≤6 months ago → Last purchase ≤£10 → **Unlikely** | Unlikely |
+| **Tree 2** | Last purchase ≤6 months ago → Last purchase ≤£10 → Visited recently (Yes) → **Likely** | Likely |
+| **Tree 3** | Last purchase ≤£10 → Last purchase ≤6 months ago → Visited recently (Yes) → **Likely** | Likely |
+
+**Tree 1** stops at the low purchase value and immediately classifies as unlikely, ignoring the recent site visits.
+
+**Tree 2** and **Tree 3** both consider the recent site activity and recognise that a customer actively browsing the site signals purchase intent.
+
+### Customer 2 Classification
+
+| Tree | Decision Path | Classification |
+|------|---------------|----------------|
+| **Tree 1** | Last purchase >6 months ago → Last purchase >£10 → **Likely** | Likely |
+| **Tree 2** | Last purchase >6 months ago → No recent site visits → **Unlikely** | Unlikely |
+| **Tree 3** | Last purchase >£10 → No recent site visits → **Unlikely** | Unlikely |
+
+**Tree 1** sees a high-value past customer and optimistically predicts they'll return.
+
+**Tree 2** and **Tree 3** both recognise that without recent site engagement, even a previously valuable customer is unlikely to convert soon.
+
+---
+
+## Question 3: How did you arrive at the majority decision?
+
+I applied **majority voting**, which is the standard aggregation method in bagging for classification tasks:
+
+### Step-by-Step Process
+
+**Step 1:** Trace each customer through all three decision trees to obtain individual predictions.
+
+**Step 2:** Count the votes for each class.
+
+| Customer | Likely Votes | Unlikely Votes |
+|----------|--------------|----------------|
+| 1 | 2 (Tree 2, Tree 3) | 1 (Tree 1) |
+| 2 | 1 (Tree 1) | 2 (Tree 2, Tree 3) |
+
+**Step 3:** Assign the class with the most votes as the final prediction.
+
+- **Customer 1:** 2 Likely vs 1 Unlikely → **Likely** wins
+- **Customer 2:** 1 Likely vs 2 Unlikely → **Unlikely** wins
+
+### Summary Table
 
 | Customer | Tree 1 | Tree 2 | Tree 3 | Majority Vote | Final Prediction |
 |----------|--------|--------|--------|---------------|------------------|
-| 1 | Unlikely | Likely | Likely | 2 Likely, 1 Unlikely | **Likely to purchase soon** |
-| 2 | Likely | Unlikely | Unlikely | 1 Likely, 2 Unlikely | **Unlikely to purchase soon** |
-
-**Customer 1:** Despite Tree 1 predicting "unlikely," the ensemble overrules this because two trees agree that recent site visits from a recent customer signal purchase intent.
-
-**Customer 2:** Despite Tree 1 seeing a high-value past purchaser as promising, the ensemble recognises that someone who hasn't visited recently — regardless of past spending — is unlikely to convert.
+| 1 | Unlikely | Likely | Likely | 2-1 Likely | **Likely to purchase soon** |
+| 2 | Likely | Unlikely | Unlikely | 2-1 Unlikely | **Unlikely to purchase soon** |
 
 ---
 
-## What This Demonstrates About Bagging
+## Question 4: What does this process demonstrate about how bagging works in practice?
 
-### 1. Diversity Through Different Tree Structures
-Each tree uses the same three features but structures them differently, leading to different decision boundaries. This diversity is the foundation of bagging's power — if all trees were identical, combining them would offer no benefit.
+This exercise illustrates several key principles of bagging:
 
-### 2. Robustness Through Aggregation
-Individual trees can make errors. Tree 1 missed Customer 1's purchase intent; Tree 1 was overly optimistic about Customer 2. But by aggregating votes, these individual errors are corrected by the collective wisdom of the ensemble.
+### 1. Diversity is Essential
+Each tree uses the same three features but structures its decisions differently — Tree 1 starts with recency, Tree 2 also starts with recency but branches differently, and Tree 3 starts with purchase value. This structural diversity means trees make different errors, which is precisely what makes combining them valuable.
+
+### 2. Individual Errors Get Corrected
+Tree 1 made questionable predictions for both customers — it missed Customer 1's purchase intent (ignoring their active site engagement) and was overly optimistic about Customer 2 (ignoring their lack of recent engagement). The ensemble corrected both errors through majority voting.
 
 ### 3. Majority Voting Reduces Variance
-Any single tree might overfit to specific patterns in its training data. By taking a majority vote, bagging smooths out these idiosyncrasies and produces more stable, reliable predictions.
+A single tree can be sensitive to the specific patterns it learned. By requiring a majority to agree, bagging smooths out these idiosyncrasies and produces more stable, reliable predictions.
 
 ### 4. The "Wisdom of Crowds" Effect
-For a bagged prediction to be wrong, the *majority* of trees must be wrong. If each tree has, say, a 30% error rate and their errors are independent, the probability that 2 out of 3 are wrong is much lower than 30%. This is the mathematical foundation of why ensembles outperform individual models.
+For a bagged ensemble to make a wrong prediction, the *majority* of trees must be wrong simultaneously. If individual trees have independent errors, the probability of majority failure is mathematically much lower than individual tree failure. This is why ensembles consistently outperform single models.
+
+### 5. Practical Trade-off
+The ensemble sacrificed Tree 1's correct classification of Customer 2 (as Likely) in favour of the majority view. In practice, this trade-off is worthwhile because the ensemble's overall accuracy across many predictions will be higher than any single tree's accuracy.
 
 ---
 
-## Practical Implications
+## Connection to My Capstone Project
 
-In real-world applications like my Hull Tactical market prediction project, bagging (through Random Forests) offers similar benefits:
+In my Hull Tactical market prediction project, bagging through Random Forests provides these same benefits:
 
-- **Reduced overfitting:** A single decision tree might memorise historical market patterns that don't repeat; an ensemble is more likely to capture genuine, persistent signals.
-- **Stable predictions:** Markets are noisy. Individual models can produce erratic signals; bagged models provide smoother, more consistent predictions.
-- **Feature robustness:** If one tree over-relies on a noisy feature, other trees using different structures will counterbalance this.
+- **Reduced overfitting:** A single tree might memorise historical patterns that don't repeat; an ensemble captures more robust signals.
+- **Stable predictions:** Financial markets are noisy; bagged models produce smoother, more consistent forecasts.
+- **Error correction:** When one tree makes a poor prediction due to noise in its training subset, other trees compensate.
 
-The customer purchase example illustrates exactly why ensemble methods have become the standard approach in machine learning — they harness diversity to achieve accuracy that individual models cannot match.
+The customer purchase example demonstrates exactly why ensemble methods have become the standard approach in machine learning — they harness diversity to achieve accuracy that individual models cannot match.
