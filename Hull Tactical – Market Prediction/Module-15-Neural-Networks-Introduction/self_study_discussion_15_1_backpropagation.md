@@ -1,101 +1,122 @@
 # Self-Study Discussion 15.1: Replicate the Backpropagation Example
 
+---
+
 ## Part 1: Forward and Backward Pass
 
 ### Computation Graph
 
-```
-        b
-        │
-    ┌───┴───┐
-a ──┤   ×   ├──► c₁ ──┐
-    └───────┘         │
-                      ├──► c₃ ──► ln ──► c₄
-    ┌───────┐         │
-a ──┤ max(,2)├──► c₂ ──┘
-    └───────┘
-```
+From the given graph, we have the following nodes:
+
+- **c₁ = a × b** (multiplication)
+- **c₂ = max(a, 2)** (max function)
+- **c₃ = c₁ + c₂** (addition)
+- **c₄ = ln(c₃)** (natural logarithm)
+
+---
 
 ### Forward Pass
 
-Computing intermediate values left to right:
+Computing intermediate values from left to right:
 
-| Node | Expression | Value |
-|------|------------|-------|
-| c₁ | a × b | ab |
-| c₂ | max(a, 2) | a if a > 2, else 2 |
-| c₃ | c₁ + c₂ | ab + max(a, 2) |
-| c₄ | ln(c₃) | ln(ab + max(a, 2)) |
+$$c_1 = a \cdot b$$
 
-**Final output:** c₄ = ln(ab + max(a, 2))
+$$c_2 = \max(a, 2) = \begin{cases} a & \text{if } a > 2 \\ 2 & \text{if } a \leq 2 \end{cases}$$
+
+$$c_3 = c_1 + c_2 = ab + \max(a, 2)$$
+
+$$c_4 = \ln(c_3) = \ln(ab + \max(a, 2))$$
+
+**Final Output:**
+
+$$\boxed{c_4 = \ln(ab + \max(a, 2))}$$
+
+---
 
 ### Backward Pass
 
-Applying the chain rule from right to left to compute dc₄/da:
+We compute $\frac{dc_4}{da}$ by applying the chain rule from right to left.
 
-**Step 1: Log node derivative**
-```
-∂c₄/∂c₃ = 1/c₃
-```
+**Step 1: Derivative of the logarithm node**
 
-**Step 2: Addition node derivatives**
-```
-∂c₃/∂c₁ = 1
-∂c₃/∂c₂ = 1
-```
+$$\frac{\partial c_4}{\partial c_3} = \frac{1}{c_3}$$
 
-**Step 3: Branch derivatives with respect to a**
-```
-∂c₁/∂a = b                    (multiplication rule)
-∂c₂/∂a = 1 if a > 2, 0 if a < 2, undefined at a = 2
-```
+**Step 2: Derivative of the addition node**
 
-**Step 4: Combine using chain rule**
+$$\frac{\partial c_3}{\partial c_1} = 1 \quad \text{and} \quad \frac{\partial c_3}{\partial c_2} = 1$$
 
-Since a affects c₄ through two paths (c₁ and c₂):
+**Step 3: Derivative of the multiplication node**
 
-```
-dc₄/da = (∂c₄/∂c₃) × [(∂c₃/∂c₁ × ∂c₁/∂a) + (∂c₃/∂c₂ × ∂c₂/∂a)]
+$$\frac{\partial c_1}{\partial a} = b$$
 
-dc₄/da = (1/c₃) × [b + 𝟙(a > 2)]
-```
+**Step 4: Derivative of the max node**
 
-**Final gradient:**
+$$\frac{\partial c_2}{\partial a} = \frac{\partial}{\partial a} \max(a, 2) = \begin{cases} 1 & \text{if } a > 2 \\ 0 & \text{if } a < 2 \\ \text{undefined} & \text{if } a = 2 \end{cases}$$
 
-| Condition | dc₄/da |
-|-----------|--------|
-| a > 2 | (b + 1) / (ab + a) |
-| a < 2 | b / (ab + 2) |
-| a = 2 | Undefined |
+**Step 5: Apply the chain rule**
+
+Since $a$ flows to $c_4$ through two branches ($c_1$ and $c_2$), we sum the contributions:
+
+$$\frac{dc_4}{da} = \frac{\partial c_4}{\partial c_3} \cdot \left( \frac{\partial c_3}{\partial c_1} \cdot \frac{\partial c_1}{\partial a} + \frac{\partial c_3}{\partial c_2} \cdot \frac{\partial c_2}{\partial a} \right)$$
+
+Substituting:
+
+$$\frac{dc_4}{da} = \frac{1}{c_3} \cdot \left( 1 \cdot b + 1 \cdot \frac{\partial c_2}{\partial a} \right)$$
+
+$$\frac{dc_4}{da} = \frac{1}{ab + \max(a,2)} \cdot \left( b + \mathbb{1}_{[a > 2]} \right)$$
+
+**Final Gradient:**
+
+$$\boxed{\frac{dc_4}{da} = \begin{cases} \displaystyle\frac{b + 1}{ab + a} = \frac{b+1}{a(b+1)} = \frac{1}{a} & \text{if } a > 2 \\[12pt] \displaystyle\frac{b}{ab + 2} & \text{if } a < 2 \\[12pt] \text{undefined} & \text{if } a = 2 \end{cases}}$$
 
 ---
 
 ## Part 2: Reflection Questions
 
-### 1. Where does non-differentiability arise?
+### 1. Where in the graph does the non-differentiability arise?
 
-At the **max(a, 2) node** when **a = 2**. The max function creates a "kink" where the output switches from the constant 2 to the variable a. This mirrors the non-differentiability of ReLU at zero — both are piecewise linear functions with a sharp transition point.
+The non-differentiability occurs at the **max(a, 2) node** when **a = 2**.
 
-### 2. How does the choice of a affect gradient flow?
+At this point, the function $\max(a, 2)$ has a sharp corner where the derivative abruptly jumps from 0 to 1:
 
-The value of a acts as a **gate** for the c₂ branch:
-- **a > 2:** Both branches contribute to the gradient (b + 1 in numerator)
-- **a < 2:** The max branch is "dead" — outputs constant 2, so ∂c₂/∂a = 0, blocking gradient flow through that path
+$$\lim_{a \to 2^-} \frac{\partial c_2}{\partial a} = 0 \quad \neq \quad \lim_{a \to 2^+} \frac{\partial c_2}{\partial a} = 1$$
 
-This illustrates how certain neurons can become inactive during training, a phenomenon known as the "dying ReLU" problem in deep learning.
+This is analogous to the non-differentiability of ReLU at zero, which is ubiquitous in neural networks.
 
-### 3. Why break complex expressions into intermediate steps?
+---
 
-Three key benefits:
-- **Modularity:** Each node has a simple local derivative, avoiding messy nested differentiation
-- **Reusability:** Intermediate values computed in the forward pass are reused in the backward pass
-- **Debugging:** Isolates where gradients vanish or explode, making it easier to diagnose training issues
+### 2. How does the choice of value for $a$ affect the flow of gradients?
 
-This decomposition is exactly how automatic differentiation frameworks (PyTorch, TensorFlow) implement backpropagation efficiently.
+The value of $a$ acts as a **gate** controlling gradient flow through the $c_2$ branch:
 
-### 4. Which method was more intuitive — forward or backward?
+| Condition | Gradient through $c_1$ branch | Gradient through $c_2$ branch | Total $\frac{dc_4}{da}$ |
+|-----------|------------------------------|------------------------------|------------------------|
+| $a > 2$ | $\frac{b}{c_3}$ | $\frac{1}{c_3}$ | $\frac{b+1}{c_3}$ |
+| $a < 2$ | $\frac{b}{c_3}$ | **0** (blocked) | $\frac{b}{c_3}$ |
 
-**Forward pass** is more intuitive for understanding *what* the function computes — it follows natural cause-and-effect.
+When $a < 2$, the max node outputs a constant (2), so $\frac{\partial c_2}{\partial a} = 0$, effectively **killing the gradient** through that path. This mirrors the "dying ReLU" problem in deep networks.
 
-**Backward pass** is more intuitive for understanding *how* to optimise — it reveals each component's contribution to the output. For neural networks with millions of parameters but a single loss value, backward mode is computationally essential: one backward pass computes all gradients simultaneously.
+---
+
+### 3. Why is it helpful to break complex expressions into intermediate steps?
+
+Breaking $c_4 = \ln(ab + \max(a,2))$ into nodes $c_1, c_2, c_3, c_4$ provides:
+
+1. **Simplified local derivatives:** Each node requires only elementary calculus ($\frac{d}{dx}\ln(x) = \frac{1}{x}$, $\frac{d}{dx}(x \cdot y) = y$)
+
+2. **Efficient computation:** Forward pass values are cached and reused in the backward pass
+
+3. **Automatic differentiation compatibility:** This decomposition is exactly how PyTorch and TensorFlow implement backpropagation via computational graphs
+
+4. **Debugging clarity:** Identifies exactly where gradients vanish or explode
+
+---
+
+### 4. Which method — forward or backward — was more intuitive for you, and why?
+
+**Forward pass** is more intuitive for understanding the function's behaviour — it follows the natural flow of computation from inputs to outputs.
+
+**Backward pass** is more intuitive for understanding optimisation — it reveals how each intermediate variable contributes to the final output. For neural networks with $n$ parameters and a single scalar loss, backward mode computes all $n$ gradients in $O(1)$ backward passes, whereas forward mode would require $O(n)$ passes.
+
+For this problem, the backward pass clarified how the max node creates conditional gradient flow — insight that would be obscured in a direct analytical differentiation.
 
