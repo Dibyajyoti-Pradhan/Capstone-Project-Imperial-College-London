@@ -117,8 +117,16 @@ Capstone-Project-Imperial-College-London/
 │   ├── Module-10-Bagging/
 │   ├── Module-11-Naive-Bayes/
 │   ├── Module-12-Bayesian-Optimisation/
-│   ├── Module-13-Logistic-Regression/
-│   ├── Module-14-Support-Vector-Machines/
+│   ├── Module-16-Neural-Networks/
+│   └── README.md
+├── Black-Box-Optimisation-Challenge/
+│   ├── week_1_exploration_strategy.md
+│   ├── week_2_output_guided_search.md
+│   ├── week_3_svm_strategy.md
+│   ├── week_4_neural_network_surrogates.md
+│   ├── week_5_neural_network_concepts.md
+│   ├── week_5_software_architecture.md
+│   ├── hyperparameter_tuning.md
 │   └── README.md
 └── Data-Split-Strategy-Analysis/
 ```
@@ -133,7 +141,7 @@ Upon completion, I will receive a verified **Digital Certificate from Imperial E
 
 ## Connect
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/dibyajyoti-pradhan/)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/dibyajyoti-pradhan-83a649146/)
 [![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Dibyajyoti-Pradhan)
 
 ---
