@@ -91,7 +91,3 @@ Currently at ~50/50 overall, but varying significantly:
 
 Rather than applying one method blindly, I adapt strategy to each function's characteristics. Model complexity scales with data availability — simple heuristics early, surrogate models later. Decisions are documented with explicit rationale, treating this as a living record of iterative learning under uncertainty.
 
----
-
-**Word count: ~680**
-

@@ -78,7 +78,4 @@ This challenge develops core competencies directly transferable to real-world pr
 
 **Connection to Hull Tactical:** The BBO challenge parallels the capstone project directly. Both involve unknown underlying dynamics, expensive evaluations (forward-chaining CV), noisy outputs (financial returns), and the need to balance exploration of new hypotheses against exploitation of known patterns.
 
----
-
-**Word count: ~690**
 

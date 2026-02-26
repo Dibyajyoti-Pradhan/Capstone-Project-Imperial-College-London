@@ -87,6 +87,3 @@ Yes, interpretability proved valuable even without fitting explicit linear model
 
 This feature-level thinking guided query selection by highlighting which directions showed promise and where uncertainty remained highest.
 
----
-
-**Word count: ~680**
