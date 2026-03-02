@@ -65,7 +65,7 @@
 | F1 | 2D | Exploration | Near-zero outputs throughout | Probe unexplored region |
 | F2 | 2D | Balanced | Moderate, improving | Small directional step |
 | F3 | 3D | Balanced | Gradual improvement | Continue trajectory |
-| F4 | 3D | Exploitation | Consistent gains | Local refinement |
+| F4 | 4D | Exploitation | Consistent gains | Local refinement |
 | F5 | 4D | Full exploitation | Strong ridge ~1600+ | Boundary exploitation |
 | F6 | 5D | Balanced | Noisy, moderate | Conservative refinement |
 | F7 | 6D | Exploration | Plateau, uncertain | Probe undersampled region |

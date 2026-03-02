@@ -119,10 +119,19 @@ Capstone-Project-Imperial-College-London/
 │   ├── Module-9-Decision-Trees/
 │   │   └── capstone_component_9_1_decision_trees.md
 │   └── README.md
-├── Black-Box-Optimisation-Challenge/         ← BBO capstone (Modules 12–21)
-│   ├── DATASHEET.md                          ← Dataset documentation
-│   ├── MODEL_CARD.md                         ← Optimisation approach documentation
+├── Black-Box-Optimisation-Challenge/         ← BBO capstone (Modules 12–22)
+│   ├── data/
+│   │   ├── initial_data/function_{1-8}/      ← initial_inputs.npy, initial_outputs.npy
+│   │   └── queries_data/                     ← round_10_queries.csv, round_11_queries.csv
+│   ├── notebooks/
+│   │   └── bbo_function_{1-8}.ipynb         ← GP-UCB notebooks per function
+│   ├── src/
+│   │   ├── bbo_utils.py                      ← reusable GP/UCB/LHS utilities
+│   │   └── generate_notebooks.py            ← notebook generator script
+│   ├── DATASHEET.md                          ← Gebru et al. (2021) dataset docs
+│   ├── MODEL_CARD.md                         ← Mitchell et al. (2019) model docs
 │   ├── README.md
+│   ├── requirements.txt
 │   ├── week_1_exploration_strategy.md
 │   ├── week_2_output_guided_search.md
 │   ├── week_3_svm_strategy.md
@@ -136,7 +145,8 @@ Capstone-Project-Imperial-College-London/
 │   ├── capstone_component_18_1_hpo_reflection.md
 │   ├── capstone_component_19_1_prompting_strategies.md
 │   ├── capstone_component_20_1_scaling_emergence.md
-│   └── capstone_component_21_1_bbo_round_10.md
+│   ├── capstone_component_21_1_bbo_round_10.md
+│   └── capstone_component_22_1_bbo_round_11.md
 └── Data-Split-Strategy-Analysis/
 ```
 

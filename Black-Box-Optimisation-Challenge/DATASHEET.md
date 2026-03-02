@@ -22,16 +22,16 @@ The challenge infrastructure was provided by Imperial College London. The datase
 **What does it contain?**
 The dataset consists of input–output pairs for eight unknown functions:
 
-| Function | Input Dimension | Approx. Queries | Output Range |
-|----------|----------------|-----------------|--------------|
-| F1 | 2D | ~12 | Near-zero |
-| F2 | 2D | ~12 | Moderate |
-| F3 | 3D | ~12 | Moderate |
-| F4 | 3D | ~12 | Moderate |
-| F5 | 4D | ~12 | High (~1600+) |
-| F6 | 5D | ~12 | Moderate |
-| F7 | 6D | ~12 | Low-moderate |
-| F8 | 8D | ~12 | High |
+| Function | Input Dimension | Initial Points | Approx. Queries | Output Range |
+|----------|----------------|---------------|-----------------|--------------|
+| F1 | 2D | 10 | ~13 | Near-zero |
+| F2 | 2D | 10 | ~13 | Moderate |
+| F3 | 3D | 15 | ~13 | Moderate |
+| F4 | 4D | 30 | ~13 | Moderate |
+| F5 | 4D | 20 | ~13 | High (~1600+) |
+| F6 | 5D | 20 | ~13 | Moderate |
+| F7 | 6D | 30 | ~13 | Low-moderate |
+| F8 | 8D | 40 | ~13 | High |
 
 **Format:** Each record is a tuple `(x₁, x₂, ..., x_d, y)` where each `xᵢ ∈ [0, 1)` is specified to six decimal places and `y` is the scalar function output.
 
