@@ -147,7 +147,6 @@ Capstone-Project-Imperial-College-London/
 │   ├── capstone_component_20_1_scaling_emergence.md
 │   ├── capstone_component_21_1_bbo_round_10.md
 │   └── capstone_component_22_1_bbo_round_11.md
-└── Data-Split-Strategy-Analysis/
 ```
 
 ---
