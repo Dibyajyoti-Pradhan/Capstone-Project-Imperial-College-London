@@ -109,25 +109,34 @@ Parallel to the main prediction task, I participated in a **Black-Box Optimisati
 ```
 Capstone-Project-Imperial-College-London/
 ├── README.md
-├── Hull Tactical – Market Prediction/
+├── Hull Tactical – Market Prediction/        ← S&P 500 market prediction capstone
 │   ├── Module-6-Execution-Plan/
+│   │   └── capstone_component_6_1_execution_plan.md
 │   ├── Module-7-Cross-Validation/
+│   │   └── capstone_component_7_1_answer.md
 │   ├── Module-8-KNN/
+│   │   └── capstone_component_8_1_hyperparameter_tuning.md
 │   ├── Module-9-Decision-Trees/
-│   ├── Module-10-Bagging/
-│   ├── Module-11-Naive-Bayes/
-│   ├── Module-12-Bayesian-Optimisation/
-│   ├── Module-16-Neural-Networks/
+│   │   └── capstone_component_9_1_decision_trees.md
 │   └── README.md
-├── Black-Box-Optimisation-Challenge/
+├── Black-Box-Optimisation-Challenge/         ← BBO capstone (Modules 12–21)
+│   ├── DATASHEET.md                          ← Dataset documentation
+│   ├── MODEL_CARD.md                         ← Optimisation approach documentation
+│   ├── README.md
 │   ├── week_1_exploration_strategy.md
 │   ├── week_2_output_guided_search.md
 │   ├── week_3_svm_strategy.md
 │   ├── week_4_neural_network_surrogates.md
 │   ├── week_5_neural_network_concepts.md
 │   ├── week_5_software_architecture.md
+│   ├── week_6_cnn_reflection.md
 │   ├── hyperparameter_tuning.md
-│   └── README.md
+│   ├── capstone_component_17_1_bbo_reflection.md
+│   ├── capstone_component_17_2_technical_foundations.md
+│   ├── capstone_component_18_1_hpo_reflection.md
+│   ├── capstone_component_19_1_prompting_strategies.md
+│   ├── capstone_component_20_1_scaling_emergence.md
+│   └── capstone_component_21_1_bbo_round_10.md
 └── Data-Split-Strategy-Analysis/
 ```
 
