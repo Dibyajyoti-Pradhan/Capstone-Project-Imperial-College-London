@@ -77,7 +77,7 @@ Black-Box-Optimisation-Challenge/
 | Week | Module | Strategy | Status |
 |------|--------|----------|--------|
 | 1 | 12 | Max-distance exploration (no outputs) | ✅ Submitted |
-| 2 | 13 | Output-guided — adapt per function | ⏳ Pending outputs |
+| 2 | 13 | Output-guided: exploit F5/F8, explore F1/F7, escape F3/F6 | ✅ Submitted |
 | 3–13 | 14–24 | GP-UCB with function-specific tuning | 🔜 |
 
 ---
