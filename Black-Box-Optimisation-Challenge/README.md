@@ -81,7 +81,8 @@ Black-Box-Optimisation-Challenge/
 | 3 | 14 | GP-UCB surrogates: trust region F5/F8, κ=5.0 F1/F7, balanced rest | ✅ Submitted |
 | 4 | 15 | Hybrid GP + MLP gradient ascent: F7/F8 via backprop gradients | ✅ Submitted |
 | 5 | 16 | Hierarchical strategy: tight exploit F5/F8, gradient ascent F7, explore F1 | ✅ Submitted |
-| 6–13 | 17–24 | GP-UCB with function-specific tuning | 🔜 |
+| 6 | 17 | CNN-parallel: progressive feature extraction, trust-region F5/F8, gradient ascent F7 | ✅ Submitted |
+| 7–13 | 18–24 | GP-UCB with function-specific tuning | 🔜 |
 
 ---
 
