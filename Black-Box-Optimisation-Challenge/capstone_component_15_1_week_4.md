@@ -26,7 +26,7 @@
 
 ### 1. Which inputs acted like support vectors?
 
-Certain inputs exhibited support-vector-like behaviour — points where small perturbations caused disproportionately large output changes. In **Function 5**, coordinates near (0.95, 0.08, 0.82, 0.95) produced outputs exceeding 1600, while nearby points dropped sharply. This suggests proximity to a steep ridge or decision boundary.
+Certain inputs exhibited support-vector-like behaviour — points where small perturbations caused disproportionately large output changes. In **Function 5**, coordinates near **(0.999, 0.999, 0.999, 0.999)** produced outputs exceeding 1600, while nearby points dropped sharply. This confirms a steep ridge concentrated at the boundary of the search space.
 
 **Function 8** showed similar patterns: dimensions X1 and X3 appeared to define a narrow high-performance corridor. Points straddling this boundary acted as natural support vectors, marking the transition between promising and unpromising regions.
 
@@ -71,13 +71,13 @@ For **high-dimensional functions (F7–F8)**, neural networks became more approp
 
 ### 5. Steepest gradients and variable influence
 
-Backpropagation through the MLP surrogate revealed:
+Backpropagation through the MLP surrogate revealed the following dimension importance rankings:
 
-| Function | Most Influential Dimensions | Gradient Magnitude |
-|----------|----------------------------|--------------------|
-| F5 (4D) | X3, X4 | High (steep ridge) |
-| F7 (6D) | X2, X5 | Moderate |
-| F8 (8D) | X1, X3 | Very high |
+| Function | Most Influential Dimensions | Gradient Magnitude  |
+|:---------|:---------------------------|:--------------------|
+| F5 (4D)  | X3, X4                     | High (steep ridge)  |
+| F7 (6D)  | X2, X5                     | Moderate            |
+| F8 (8D)  | X1, X3                     | Very high           |
 
 For F8, I effectively reduced the search from 8D to a **pseudo-2D problem** by fixing low-influence dimensions at their current best values and varying only X1 and X3.
 
