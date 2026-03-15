@@ -3,6 +3,7 @@
 
 **Module:** 23 — Dimensionality Reduction
 **Submitted:** 15/03/2026
+**Posted:** 15/03/2026
 **Cohort:** IMP-PCMLAI-25-08
 
 ---
@@ -31,7 +32,7 @@
 Week 1 was pure exploration — max-distance queries with no surrogate model, relying on Latin Hypercube Sampling to cover the input space without prior beliefs. By Week 12, the approach has become fully systematic:
 
 - **Surrogate models** (GPs, MLPs) now underpin every query, replacing intuition with uncertainty quantification
-- **Function-specific κ schedules**: high-confidence functions (F5, F8) operate at κ=0.05 whilst uncertain ones (F1, F7) retain κ≥1.5
+- **Function-specific κ schedules:** high-confidence functions (F5, F8) operate at κ=0.05 whilst uncertain ones (F1, F7) retain κ≥1.5
 - **Trust regions** anchor high-performing functions within ±0.01–0.04 of best-known coordinates, preventing wasteful exploration of regions the GP has already rejected
 - **Gradient-guided search** on F7 uses finite-difference sensitivity to navigate the 6D space directionally rather than stochastically
 
