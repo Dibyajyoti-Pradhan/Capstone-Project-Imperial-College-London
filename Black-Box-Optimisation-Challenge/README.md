@@ -79,7 +79,8 @@ Black-Box-Optimisation-Challenge/
 | 1 | 12 | Max-distance exploration (no outputs) | ✅ Submitted |
 | 2 | 13 | Output-guided: exploit F5/F8, explore F1/F7, escape F3/F6 | ✅ Submitted |
 | 3 | 14 | GP-UCB surrogates: trust region F5/F8, κ=5.0 F1/F7, balanced rest | ✅ Submitted |
-| 4–13 | 15–24 | GP-UCB with function-specific tuning | 🔜 |
+| 4 | 15 | Hybrid GP + MLP gradient ascent: F7/F8 via backprop gradients | ✅ Submitted |
+| 5–13 | 16–24 | GP-UCB with function-specific tuning | 🔜 |
 
 ---
 
