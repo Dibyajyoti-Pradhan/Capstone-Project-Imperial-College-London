@@ -84,7 +84,8 @@ Black-Box-Optimisation-Challenge/
 | 6 | 17 | CNN-parallel: progressive feature extraction, trust-region F5/F8, gradient ascent F7 | ✅ Submitted |
 | 7 | 18 | Adaptive κ scheduling, tighter trust regions, dimension reduction F8 | ✅ Submitted |
 | 8 | 19 | LLM-assisted hypothesis generation; few-shot CoT prompting; trust regions F5/F8 | ✅ Submitted |
-| 9–11 | 20–22 | GP-UCB with function-specific tuning | ✅ Submitted |
+| 9 | 20 | Scaling-law framing; tiered exploit/explore; ensemble hedging F7/F8 | ✅ Submitted |
+| 10–11 | 21–22 | GP-UCB with function-specific tuning | ✅ Submitted |
 | 12 | 23 | PCA-inspired dimension reduction; ultra-tight trust regions F5/F8 (21 pts) | ✅ Submitted |
 | 13 | 24 | Final round: decisive exploitation F5/F8, reduced 4D subspace F8 | 🔜 |
 
