@@ -10,7 +10,7 @@
 |-------|--------|
 | **Name** | Hybrid GP–SVM–Neural BBO Optimiser |
 | **Type** | Black-box function optimiser |
-| **Version** | Final (Round 10, Module 21) |
+| **Version** | v1.0 (Round 12, Module 23) |
 | **Developer** | Dibyajyoti Pradhan |
 | **Repository** | https://github.com/Dibyajyoti-Pradhan/Capstone-Project-Imperial-College-London |
 | **Licence** | MIT |
@@ -54,7 +54,10 @@
 | 13 | Output-guided | Function-specific strategies, 70/30 explore/exploit |
 | 14 | SVM classification | Threshold outputs → binary region classifier |
 | 15–16 | Neural surrogates | MLP gradient ascent for high-D functions |
-| 17–21 | Full exploitation | Trust regions, dimension-aware search |
+| 17–18 | CNN/HPO parallels | Trust regions tighten; adaptive κ scheduling |
+| 19–20 | LLM/scaling parallels | Few-shot CoT prompting; scaling-law framing |
+| 21–22 | Transparency lens | Model card/datasheet framing; stationarity analysis |
+| 23 | PCA dimension reduction | F8 reduced to 4D subspace; ultra-tight trust regions |
 
 ---
 

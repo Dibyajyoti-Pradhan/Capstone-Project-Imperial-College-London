@@ -10,7 +10,7 @@
 This dataset supports black-box function optimisation (BBO) — specifically, the task of maximising eight unknown functions $f_1, \ldots, f_8$ with dimensionality ranging from 2D to 8D, given a severely limited query budget (~10 evaluations per function over 10 rounds).
 
 **Who created it, and why?**
-Created by Dibyajyoti Pradhan as part of the Imperial College London Professional Certificate in Machine Learning and Artificial Intelligence (Modules 12–21). The dataset documents every query submitted and the corresponding function evaluations returned by the BBO challenge portal, providing a complete audit trail of the optimisation strategy.
+Created by Dibyajyoti Pradhan as part of the Imperial College London Professional Certificate in Machine Learning and Artificial Intelligence (Modules 12–24). The dataset documents every query submitted and the corresponding function evaluations returned by the BBO challenge portal, providing a complete audit trail of the optimisation strategy.
 
 **Was it funded or supported by an organisation?**
 The challenge infrastructure was provided by Imperial College London. The dataset itself was generated independently through coursework submissions.
@@ -55,7 +55,7 @@ Queries were generated through a three-phase strategy:
 2. **Weeks 3–5 (Pattern recognition):** Output-guided search using SVM region classification and Gaussian Process (GP) surrogates with UCB acquisition functions.
 3. **Weeks 6–10 (Exploitation):** Hybrid GP + neural network (MLP) surrogates with gradient-informed query placement; trust-region exploitation for high-performing functions (F5, F8).
 
-**Time frame:** Queries were submitted weekly over approximately 10 weeks (Modules 12–21 of the programme).
+**Time frame:** Queries were submitted weekly over 13 weeks (Modules 12–24 of the programme).
 
 **Ethical review:** This is a structured academic exercise with no human subjects, personal data or ethical risk. No institutional review board approval was required.
 
@@ -91,7 +91,7 @@ The dataset (embedded in weekly strategy markdown files) is publicly available a
 Available under the MIT Licence. Free to use, share and adapt with attribution.
 
 **When was it made available?**
-Progressively committed to the public GitHub repository across Modules 12–21 (January–March 2026).
+Progressively committed to the public GitHub repository across Modules 12–24 (January–March 2026).
 
 ---
 
