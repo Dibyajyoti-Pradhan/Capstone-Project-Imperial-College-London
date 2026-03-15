@@ -83,7 +83,9 @@ Black-Box-Optimisation-Challenge/
 | 5 | 16 | Hierarchical strategy: tight exploit F5/F8, gradient ascent F7, explore F1 | ✅ Submitted |
 | 6 | 17 | CNN-parallel: progressive feature extraction, trust-region F5/F8, gradient ascent F7 | ✅ Submitted |
 | 7 | 18 | Adaptive κ scheduling, tighter trust regions, dimension reduction F8 | ✅ Submitted |
-| 8–13 | 19–24 | GP-UCB with function-specific tuning | 🔜 |
+| 8–11 | 19–22 | GP-UCB with function-specific tuning | ✅ Submitted |
+| 12 | 23 | PCA-inspired dimension reduction; ultra-tight trust regions F5/F8 (21 pts) | ✅ Submitted |
+| 13 | 24 | Final round: decisive exploitation F5/F8, reduced 4D subspace F8 | 🔜 |
 
 ---
 
