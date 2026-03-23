@@ -42,22 +42,6 @@ The GP-UCB framework used in this challenge maps directly onto three professiona
 
 ---
 
-## 4. Peer Analysis
-
-**Craig Dawson** — The most interesting finding in Craig's results is that Weeks 16–18 (Random Forest and SVM surrogates) produced the best outputs for five of his eight functions, while the more sophisticated GP-TuRBO pipeline in later weeks did not improve on those results for those functions. This is a clean empirical demonstration that surrogate complexity is not monotonically related to performance. The likely explanation is that RF and SVM surrogates with brute-force search, while theoretically less principled than GPs, are less susceptible to kernel misspecification — a GP with a fixed RBF kernel will underperform a simpler model when the true function has structure that the kernel doesn't capture. Craig's observation directly supports the principle that method-function matching matters more than method sophistication.
-
-The overlap with my approach: both converged on function-specific strategies and both observed that complexity has diminishing returns. The difference: Craig's RF/SVM phase delivered better results than my LHS-only early phase did, suggesting that a non-parametric surrogate with high model flexibility can outperform LHS exploration in early rounds.
-
-**Jack Dunning** — Jack's reframing of F1 as a logistic regression boundary-finding problem is the most creative methodological decision I encountered in this cohort. My approach kept F1 as a regression target throughout, which kept it anchored near zero because the GP assigned near-zero predicted values everywhere and generated near-random UCB queries. Jack's recognition that the correct objective is not "find the maximum of a nearly-zero function" but "find the boundary of the region where the function is not zero" is a fundamental problem-reformulation that I did not consider. This is the type of insight that separates strong practitioners from competent ones: the ability to see that the problem formulation itself might be wrong.
-
-His F8 best of 9.90 versus my 9.68 confirms that his MLP + gradient ascent with multi-restart optimisation outperformed my LHS + GP posterior argmax for high-dimensional functions. This is expected: gradient-based candidate selection scales better with dimensionality because it does not require exponentially growing candidate budgets to maintain effective coverage density.
-
-**Suggestion to strengthen peers' strategies:** The single addition that would most improve both Craig's and Leonardo's pipelines is a formalised convergence diagnostic — a decision rule that triggers strategy reclassification (from exploitation back to exploration, or from one surrogate to another) when the running best has not improved for a specified number of consecutive rounds. Without this, the natural human tendency is to persist with the current approach longer than the data justifies. Jack already built this in through his Week 8 validation table; Craig and Leonardo would benefit from an equivalent.
-
-**What peers' reflections changed:** Stephen's observation that clustering emerged naturally from the EI acquisition function — without explicitly programming it — reinforced that acquisition function design implicitly encodes structural assumptions about where the optimum lies. A GP with EI will cluster in a different way than a GP with UCB even on the same function, because EI only rewards improvement over the current best while UCB rewards high predicted value regardless of improvement. Understanding this distinction would have led me to experiment with EI more explicitly for functions where the surrogate was well-calibrated but the optimum was narrow.
-
----
-
 ## References
 
 Shahriari, B. et al. (2016) 'Taking the human out of the loop: a review of Bayesian optimization', *Proceedings of the IEEE*, 104(1), pp. 148–175.
