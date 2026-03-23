@@ -7,7 +7,7 @@
 ## Motivation
 
 **What task does this dataset support?**
-This dataset supports black-box function optimisation (BBO) — specifically, the task of maximising eight unknown functions $f_1, \ldots, f_8$ with dimensionality ranging from 2D to 8D, given a severely limited query budget (~10 evaluations per function over 10 rounds).
+This dataset supports black-box function optimisation (BBO) — specifically, the task of maximising eight unknown functions $f_1, \ldots, f_8$ with dimensionality ranging from 2D to 8D, given a severely limited query budget (~13 evaluations per function over 13 rounds).
 
 **Who created it, and why?**
 Created by Dibyajyoti Pradhan as part of the Imperial College London Professional Certificate in Machine Learning and Artificial Intelligence (Modules 12–24). The dataset documents every query submitted and the corresponding function evaluations returned by the BBO challenge portal, providing a complete audit trail of the optimisation strategy.
@@ -24,14 +24,14 @@ The dataset consists of input–output pairs for eight unknown functions:
 
 | Function | Input Dimension | Initial Points | Approx. Queries | Output Range |
 |----------|----------------|---------------|-----------------|--------------|
-| F1 | 2D | 10 | ~13 | Near-zero |
-| F2 | 2D | 10 | ~13 | Moderate |
-| F3 | 3D | 15 | ~13 | Moderate |
-| F4 | 4D | 30 | ~13 | Moderate |
-| F5 | 4D | 20 | ~13 | High (~1600+) |
-| F6 | 5D | 20 | ~13 | Moderate |
-| F7 | 6D | 30 | ~13 | Low-moderate |
-| F8 | 8D | 40 | ~13 | High |
+| F1 | 2D | 10 | 13 | Near-zero (best: ~0) |
+| F2 | 2D | 10 | 13 | Moderate (best: 0.435) |
+| F3 | 3D | 15 | 13 | Moderate (best: −0.009) |
+| F4 | 4D | 30 | 13 | Moderate (best: −3.770) |
+| F5 | 4D | 20 | 13 | High (best: 8585.27) |
+| F6 | 5D | 20 | 13 | Moderate (best: −0.570) |
+| F7 | 6D | 30 | 13 | Low-moderate (best: 1.785) |
+| F8 | 8D | 40 | 13 | High (best: 9.683) |
 
 **Format:** Each record is a tuple `(x₁, x₂, ..., x_d, y)` where each `xᵢ ∈ [0, 1)` is specified to six decimal places and `y` is the scalar function output.
 
@@ -55,7 +55,7 @@ Queries were generated through a three-phase strategy:
 2. **Weeks 3–5 (Pattern recognition):** Output-guided search using SVM region classification and Gaussian Process (GP) surrogates with UCB acquisition functions.
 3. **Weeks 6–10 (Exploitation):** Hybrid GP + neural network (MLP) surrogates with gradient-informed query placement; trust-region exploitation for high-performing functions (F5, F8).
 
-**Time frame:** Queries were submitted weekly over 13 weeks (Modules 12–24 of the programme).
+**Time frame:** Queries were submitted weekly over 13 weeks, January–March 2026 (Modules 12–24 of the programme).
 
 **Ethical review:** This is a structured academic exercise with no human subjects, personal data or ethical risk. No institutional review board approval was required.
 

@@ -10,7 +10,7 @@
 |-------|--------|
 | **Name** | Hybrid GP–SVM–Neural BBO Optimiser |
 | **Type** | Black-box function optimiser |
-| **Version** | v1.0 (Round 12, Module 23) |
+| **Version** | v1.0 Final (Round 13, Module 24) |
 | **Developer** | Dibyajyoti Pradhan |
 | **Repository** | https://github.com/Dibyajyoti-Pradhan/Capstone-Project-Imperial-College-London |
 | **Licence** | MIT |
@@ -58,21 +58,22 @@
 | 19–20 | LLM/scaling parallels | Few-shot CoT prompting; scaling-law framing |
 | 21–22 | Transparency lens | Model card/datasheet framing; stationarity analysis |
 | 23 | PCA dimension reduction | F8 reduced to 4D subspace; ultra-tight trust regions |
+| 24 | RL lens (final round) | MAB framing; decisive exploitation F5/F8; last exploratory probe F1/F7 |
 
 ---
 
 ## Performance Summary
 
-| Function | Dim | Strategy Phase | Behaviour | Round 10 Action |
-|----------|-----|---------------|-----------|-----------------|
-| F1 | 2D | Exploration | Near-zero outputs throughout | Probe unexplored region |
-| F2 | 2D | Balanced | Moderate, improving | Small directional step |
-| F3 | 3D | Balanced | Gradual improvement | Continue trajectory |
-| F4 | 4D | Exploitation | Consistent gains | Local refinement |
-| F5 | 4D | Full exploitation | Strong ridge ~1600+ | Boundary exploitation |
-| F6 | 5D | Balanced | Noisy, moderate | Conservative refinement |
-| F7 | 6D | Exploration | Plateau, uncertain | Probe undersampled region |
-| F8 | 8D | Full exploitation | High, X₁/X₃ dominant | Gradient ascent step |
+| Function | Dim | Best Output | Strategy Phase | Outcome |
+|----------|-----|------------|---------------|---------|
+| F1 | 2D | ~0 | Exploration throughout | Unresolved — flat landscape confirmed |
+| F2 | 2D | 0.435 | Balanced → exploit | Drifting improvement |
+| F3 | 3D | −0.009 | Balanced → exploit | Approaching zero |
+| F4 | 4D | −3.770 | Exploit | Large early gain, then plateau |
+| **F5** | **4D** | **8585.27** | **Full exploitation from W1** | **Boundary peak at (0.999)⁴** |
+| F6 | 5D | −0.570 | Balanced | Slow improvement |
+| F7 | 6D | 1.785 | Exploration | Modest signal, unresolved |
+| F8 | 8D | 9.683 | Exploit (4D subspace) | Steady improvement via dim reduction |
 
 **Primary metric:** Observed function output at best query (maximisation).
 **Secondary metrics:** Surrogate prediction error, uncertainty reduction in promising regions, query efficiency (information gained per evaluation).
